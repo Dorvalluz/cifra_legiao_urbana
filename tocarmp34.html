@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letreiro Vertical - Geração Coca-Cola</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            background-color: black; /* Fundo preto */
+            color: green; /* Letras iniciais verdes */
+        }
+
+        #canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .button-container {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .button-container button {
+            padding: 5px 10px; /* Botões menores */
+            font-size: 14px; /* Tamanho de fonte reduzido */
+            cursor: pointer;
+        }
+
+        #text {
+            white-space: pre-wrap;
+            font-size: 14px;
+            text-align: center;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+<div id="canvas">
+    <div id="text"></div>
+</div>
+
+<div class="button-container">
+    <button id="playBtn">PLAY</button>
+    <button id="pauseBtn" disabled>PAUSE</button>
+    <button id="themeBtn">CORES</button>
+</div>
+
+<audio id="audio" src="cocaa.mp3" preload="auto"></audio> <!-- Arquivo de música -->
+<script>
+    const text = `
+B\n   Quando nascemos fomos programados
+D             A\n   A receber o que vocês
+B\n   nos empurraram com os enlatados
+D            A\n   dos U.S.A., de 9 às 6
+B\n   Desde pequenos nós comemos lixo
+D           A\n   Comercial e industrial
+B\n   Mas agora chegou nossa vez
+D                        A\nVamos cuspir de volta o lixo em cima de vocês
+(refrão)
+B            A           G\n   Somos os filhos da revolução
+B             A           G\n   Somos burgueses sem religião
+B        A         G\n   Somos o futuro da nação
+A       D    B\nGeração Coca-Cola
+(2ª estrofe)
+B\n   Depois de vinte anos na escola
+D                A\n   Não é difícil aprender
+B\n   Todas as manhas do seu jogo sujo
+D                 A\n   Não é assim que tem que ser?
+B\n   Vamos fazer nosso dever de casa
+D             A\n   E aí então, vocês vão ver
+B\n   Suas crianças derrubando reis
+D                      A\nFazer comédia no cinema com as suas leis
+(refrão)
+B            A           G\n   Somos os filhos da revolução
+B             A           G\n   Somos burgueses sem religião
+B        A         G\n   Somos o futuro da nação
+A       D    B     A       D    B\nGeração Coca-Cola, geração coca-cola
+A       D    B     A       D    B\nGeração Coca-Cola, geração coca-cola
+(solo 2 - 3x)\nG   A   B
+B\n   Depois de vinte anos na escola
+D                A\n   Não é difícil aprender
+B\n   Todas as manhas do seu jogo sujo
+D                 A\n   Não é assim que tem que ser?
+B\n   Vamos fazer nosso dever de casa
+D             A\n   E aí então, vocês vão ver
+B\n   Suas crianças derrubando reis
+D                      A\nFazer comédia no cinema com as suas leis
+(refrão)
+B            A           G\n   Somos os filhos da revolução
+B             A           G\n   Somos burgueses sem religião
+B        A         G\n   Somos o futuro da nação
+A       D    B     A       D    B\nGeração Coca-Cola, geração coca-cola
+A       D    B     A       D    B\nGeração Coca-Cola, geração coca-cola
+(solo 2 - 3x)\nG   A   B
+Composição: Renato Russo
+Elaborado por Dorval Luz
+`;
+
+    let yPos = window.innerHeight;
+    let scrolling = false;
+    let scrollSpeed = 0.2;  // Ajuste da velocidade de rolagem
+    let audioDuration = 240;  // Aproximadamente a duração da música (em segundos)
+
+    const textElement = document.getElementById('text');
+    const playBtn = document.getElementById('playBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const themeBtn = document.getElementById('themeBtn');
+    const audio = document.getElementById('audio');
+
+    // Carregar o texto
+    textElement.innerText = text;
+
+    // Função para atualizar a posição do texto
+    function updateTextPosition() {
+        if (scrolling) {
+            yPos -= scrollSpeed;  // Movimentação mais lenta
+            textElement.style.transform = `translateY(${yPos}px)`;
+
+            // Quando o texto sair completamente da tela, reinicia
+            if (yPos < -textElement.clientHeight) {
+                yPos = window.innerHeight;
+            }
+            requestAnimationFrame(updateTextPosition);
+        }
+    }
+
+    // Função para iniciar ou parar o letreiro e a música
+    function toggleScrolling() {
+        if (scrolling) {
+            scrolling = false;
+            playBtn.innerText = 'PLAY';
+            pauseBtn.disabled = true;
+            audio.pause();
+        } else {
+            // Reiniciar o áudio e o letreiro
+            audio.currentTime = 0;  // Vai para o início da música
+            yPos = window.innerHeight;  // Volta o letreiro para o início
+            scrolling = true;
+            playBtn.innerText = 'STOP';
+            pauseBtn.disabled = false;
+            audio.play();
+            updateTextPosition();
+        }
+    }
+
+    // Função para pausar ou retomar o letreiro e a música
+    function pauseScrolling() {
+        if (scrolling) {
+            scrolling = false;
+            pauseBtn.innerText = 'RESUME';
+            audio.pause();
+        } else {
+            scrolling = true;
+            pauseBtn.innerText = 'PAUSE';
+            audio.play();
+            updateTextPosition();
+        }
+    }
+
+    // Função para mudar o tema (cor do texto para verde ou branco)
+    function changeTheme() {
+        const currentColor = textElement.style.color;
+        if (currentColor === 'green') {
+            textElement.style.color = 'white';  // Muda para branco
+        } else {
+            textElement.style.color = 'green';  // Muda para verde
+        }
+    }
+
+    // Adiciona os eventos dos botões
+    playBtn.addEventListener('click', toggleScrolling);
+    pauseBtn.addEventListener('click', pauseScrolling);
+    themeBtn.addEventListener('click', changeTheme);
+</script>
+
+</body>
+</html>
