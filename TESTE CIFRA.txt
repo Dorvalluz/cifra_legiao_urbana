@@ -1,0 +1,51 @@
+TESTE CIFRA:
+
+<script>
+    const text = `
+B\n   Quando nascemos fomos programados
+D             A\n   A receber o que vocês
+B\n   nos empurraram com os enlatados
+D            A\n   dos U.S.A., de 9 às 6
+B\n   Desde pequenos nós comemos lixo
+D           A\n   Comercial e industrial
+B\n   Mas agora chegou nossa vez
+D                        A\nVamos cuspir de volta o lixo em cima de vocês
+(refrão)
+B            A           G\n   Somos os filhos da revolução
+B             A           G\n   Somos burgueses sem religião
+B        A         G\n   Somos o futuro da nação
+A       D    B\nGeração Coca-Cola
+(2ª estrofe)
+B\n   Depois de vinte anos na escola
+D                A\n   Não é difícil aprender
+B\n   Todas as manhas do seu jogo sujo
+D                 A\n   Não é assim que tem que ser?
+B\n   Vamos fazer nosso dever de casa
+D             A\n   E aí então, vocês vão ver
+B\n   Suas crianças derrubando reis
+D                      A\nFazer comédia no cinema com as suas leis
+(refrão)
+B            A           G\n   Somos os filhos da revolução
+B             A           G\n   Somos burgueses sem religião
+B        A         G\n   Somos o futuro da nação
+A       D    B     A       D    B\nGeração Coca-Cola, geração coca-cola
+A       D    B     A       D    B\nGeração Coca-Cola, geração coca-cola
+(solo 2 - 3x)\nG   A   B
+B\n   Depois de vinte anos na escola
+D                A\n   Não é difícil aprender
+B\n   Todas as manhas do seu jogo sujo
+D                 A\n   Não é assim que tem que ser?
+B\n   Vamos fazer nosso dever de casa
+D             A\n   E aí então, vocês vão ver
+B\n   Suas crianças derrubando reis
+D                      A\nFazer comédia no cinema com as suas leis
+(refrão)
+B            A           G\n   Somos os filhos da revolução
+B             A           G\n   Somos burgueses sem religião
+B        A         G\n   Somos o futuro da nação
+A       D    B     A       D    B\nGeração Coca-Cola, geração coca-cola
+A       D    B     A       D    B\nGeração Coca-Cola, geração coca-cola
+(solo 2 - 3x)\nG   A   B
+Composição: Renato Russo
+Elaborado por Dorval Luz
+`;

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letreiro Vertical - Geração Coca-Cola</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: green;
+        }
+
+        #canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #text {
+            white-space: pre-wrap;
+            font-size: 16px;
+            text-align: center;
+            position: absolute;
+            top: 100vh;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+        }
+
+        .button-container {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Espaçamento de 2 cm */
+        }
+
+        .button-container button {
+            padding: 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div id="canvas">
+    <div id="text"></div>
+</div>
+
+<div class="button-container">
+    <button id="increaseFontBtn">A+</button>
+    <button id="decreaseFontBtn">A-</button>
+    <button id="playBtn">PLAY</button>
+    <button id="pauseBtn" disabled>PAUSE</button>
+    <button id="themeBtn">CORES</button>
+</div>
+
+<audio id="audio" src="cocaa.mp3" preload="auto"></audio>
+
+<script>
+    const text = `
+B\n   Quando nascemos fomos programados
+D             A\n   A receber o que vocês
+B\n   nos empurraram com os enlatados
+D            A\n   dos U.S.A., de 9 às 6
+B\n   Desde pequenos nós comemos lixo
+D           A\n   Comercial e industrial
+B\n   Mas agora chegou nossa vez
+D                        A\nVamos cuspir de volta o lixo em cima de vocês
+(refrão)
+B            A           G\n   Somos os filhos da revolução
+B             A           G\n   Somos burgueses sem religião
+B        A         G\n   Somos o futuro da nação
+A       D    B\nGeração Coca-Cola
+(2ª estrofe)
+B\n   Depois de vinte anos na escola
+D                A\n   Não é difícil aprender
+B\n   Todas as manhas do seu jogo sujo
+D                 A\n   Não é assim que tem que ser?
+B\n   Vamos fazer nosso dever de casa
+D             A\n   E aí então, vocês vão ver
+B\n   Suas crianças derrubando reis
+D                      A\nFazer comédia no cinema com as suas leis
+(refrão)
+B            A           G\n   Somos os filhos da revolução
+B             A           G\n   Somos burgueses sem religião
+B        A         G\n   Somos o futuro da nação
+A       D    B     A       D    B\nGeração Coca-Cola, geração coca-cola
+A       D    B     A       D    B\nGeração Coca-Cola, geração coca-cola
+(solo 2 - 3x)\nG   A   B
+B\n   Depois de vinte anos na escola
+D                A\n   Não é difícil aprender
+B\n   Todas as manhas do seu jogo sujo
+D                 A\n   Não é assim que tem que ser?
+B\n   Vamos fazer nosso dever de casa
+D             A\n   E aí então, vocês vão ver
+B\n   Suas crianças derrubando reis
+D                      A\nFazer comédia no cinema com as suas leis
+(refrão)
+B            A           G\n   Somos os filhos da revolução
+B             A           G\n   Somos burgueses sem religião
+B        A         G\n   Somos o futuro da nação
+A       D    B     A       D    B\nGeração Coca-Cola, geração coca-cola
+A       D    B     A       D    B\nGeração Coca-Cola, geração coca-cola
+(solo 2 - 3x)\nG   A   B
+Composição: Renato Russo
+Elaborado por Dorval Luz
+`;
+
+    let yPos = window.innerHeight;
+    let scrolling = false;
+    let scrollSpeed = 0.3;
+
+    const textElement = document.getElementById('text');
+    const playBtn = document.getElementById('playBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const themeBtn = document.getElementById('themeBtn');
+    const audio = document.getElementById('audio');
+    const increaseFontBtn = document.getElementById('increaseFontBtn');
+    const decreaseFontBtn = document.getElementById('decreaseFontBtn');
+
+    textElement.innerText = text;
+
+    function updateTextPosition() {
+        if (scrolling) {
+            yPos -= scrollSpeed;
+            textElement.style.top = `${yPos}px`;
+
+            if (yPos < -textElement.clientHeight) {
+                yPos = window.innerHeight;
+            }
+            requestAnimationFrame(updateTextPosition);
+        }
+    }
+
+    function toggleScrolling() {
+        if (scrolling) {
+            scrolling = false;
+            playBtn.innerText = 'PLAY';
+            pauseBtn.disabled = true;
+            audio.pause();
+        } else {
+            audio.currentTime = 0;
+            yPos = window.innerHeight;
+            scrolling = true;
+            playBtn.innerText = 'STOP';
+            pauseBtn.disabled = false;
+            audio.play();
+            updateTextPosition();
+        }
+    }
+
+    function pauseScrolling() {
+        if (scrolling) {
+            scrolling = false;
+            pauseBtn.innerText = 'RESUME';
+            audio.pause();
+        } else {
+            scrolling = true;
+            pauseBtn.innerText = 'PAUSE';
+            audio.play();
+            updateTextPosition();
+        }
+    }
+
+    function changeTheme() {
+        textElement.style.color = textElement.style.color === 'green' ? 'white' : 'green';
+    }
+
+    function increaseFontSize() {
+        let currentSize = parseFloat(window.getComputedStyle(textElement).fontSize);
+        textElement.style.fontSize = (currentSize + 2) + "px";
+    }
+
+    function decreaseFontSize() {
+        let currentSize = parseFloat(window.getComputedStyle(textElement).fontSize);
+        if (currentSize > 10) {
+            textElement.style.fontSize = (currentSize - 2) + "px";
+        }
+    }
+
+    playBtn.addEventListener('click', toggleScrolling);
+    pauseBtn.addEventListener('click', pauseScrolling);
+    themeBtn.addEventListener('click', changeTheme);
+    increaseFontBtn.addEventListener('click', increaseFontSize);
+    decreaseFontBtn.addEventListener('click', decreaseFontSize);
+</script>
+
+</body>
+</html>
