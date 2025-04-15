@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Geração Coca-Cola</title>
+  <title>Karaokê Cifra - Geração Coca-Cola</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       overflow: hidden;
-      font-family: Arial, sans-serif;
+      font-family: monospace;
       background-color: black;
-      color: green;
+      color: lime;
     }
 
     #canvas {
@@ -28,7 +28,7 @@
     #text {
       white-space: pre-wrap;
       font-size: 16px;
-      text-align: center;
+      text-align: left;
       position: absolute;
       top: 100vh;
       left: 50%;
@@ -79,58 +79,61 @@
 </audio>
 
 <script>
-  const text = `B
-Quando nascemos fomos programados
+  const text = `
+Geração Coca cola
+
+B
+   Quando nascemos fomos programados
 D             A
-A receber o que vocês
+   A receber o que vocês
 B
-nos empurraram com os enlatados
+   nos empurraram com os enlatados
 D            A
-dos U.S.A., de 9 às 6
+   dos U.S.A., de 9 às 6
 B
-Desde pequenos nós comemos lixo
+   Desde pequenos nós comemos lixo
 D           A
-Comercial e industrial
+   Comercial e industrial
 B
-Mas agora chegou nossa vez
+   Mas agora chegou nossa vez
 D                        A
 Vamos cuspir de volta o lixo em cima de vocês
 
 (refrão)
 B            A           G
-Somos os filhos da revolução
+   Somos os filhos da revolução
 B             A           G
-Somos burgueses sem religião
+   Somos burgueses sem religião
 B        A         G
-Somos o futuro da nação
+   Somos o futuro da nação
 A       D    B
 Geração Coca-Cola
 
 (2ª estrofe)
 B
-Depois de vinte anos na escola
+   Depois de vinte anos na escola
 D                A
-Não é difícil aprender
+   Não é difícil aprender
 B
-Todas as manhas do seu jogo sujo
+   Todas as manhas do seu jogo sujo
 D                 A
-Não é assim que tem que ser?
+   Não é assim que tem que ser?
 B
-Vamos fazer nosso dever de casa
+   Vamos fazer nosso dever de casa
 D             A
-E aí então, vocês vão ver
+   E aí então, vocês vão ver
 B
-Suas crianças derrubando reis
+   Suas crianças derrubando reis
 D                      A
 Fazer comédia no cinema com as suas leis
 
 (refrão)
 B            A           G
-Somos os filhos da revolução
+   Somos os filhos da revolução
 B             A           G
-Somos burgueses sem religião
+   Somos burgueses sem religião
 B        A         G
-Somos o futuro da nação
+   Somos o futuro da nação
 A       D    B     A       D    B
 Geração Coca-Cola, geração coca-cola
 A       D    B     A       D    B
@@ -139,55 +142,30 @@ Geração Coca-Cola, geração coca-cola
 (solo 2 - 3x)
 G   A   B
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 B
-Depois de vinte anos na escola
+   Depois de vinte anos na escola
 D                A
-Não é difícil aprender
+   Não é difícil aprender
 B
-Todas as manhas do seu jogo sujo
+   Todas as manhas do seu jogo sujo
 D                 A
-Não é assim que tem que ser?
+   Não é assim que tem que ser?
 B
-Vamos fazer nosso dever de casa
+   Vamos fazer nosso dever de casa
 D             A
-E aí então, vocês vão ver
+   E aí então, vocês vão ver
 B
-Suas crianças derrubando reis
+   Suas crianças derrubando reis
 D                      A
 Fazer comédia no cinema com as suas leis
 
 (refrão)
 B            A           G
-Somos os filhos da revolução
+   Somos os filhos da revolução
 B             A           G
-Somos burgueses sem religião
+   Somos burgueses sem religião
 B        A         G
-Somos o futuro da nação
-
+   Somos o futuro da nação
 A       D    B     A       D    B
 Geração Coca-Cola, geração coca-cola
 A       D    B     A       D    B
@@ -197,7 +175,8 @@ Geração Coca-Cola, geração coca-cola
 G   A   B
 
 Composição: Renato Russo
-Elaborado por Dorval Luz`;
+Elaborado por Dorval Luz
+`;
 
   let yPos = window.innerHeight;
   let scrolling = false;
@@ -259,7 +238,7 @@ Elaborado por Dorval Luz`;
   }
 
   function changeTheme() {
-    textElement.style.color = textElement.style.color === 'green' ? 'white' : 'green';
+    textElement.style.color = textElement.style.color === 'lime' ? 'white' : 'lime';
   }
 
   playBtn.addEventListener('click', toggleScrolling);
@@ -268,4 +247,4 @@ Elaborado por Dorval Luz`;
 </script>
 
 </body>
-    </html>
+</html>
