@@ -24,4 +24,4 @@ Elaborado por **Dorval Luz**.
 O projeto está disponível em GitHub Pages:  
 [**Clique aqui para visualizar o letreiro**](https://dorvalluz.github.io/cifra_legiao_urbana/)
 
-> **Nota:** certifique-se de que o arquivo `cocaa.mp3` esteja no repositório para o som funcionar corretamente.
+
