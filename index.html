@@ -1,279 +1,266 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Karaokê Cifra - Geração Coca-Cola</title>
+  <meta charset="UTF-8">
+  <title>Modo de Dizer</title>
   <style>
     body {
+      background-color: #000;
+      color: #c0c0c0;
+      font-family: sans-serif;
       margin: 0;
-      padding: 0;
-      overflow: hidden;
-      font-family: monospace;
-      background-color: black;
-      color: lime;
-    }
-
-    #canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      padding-right: 100px;
+      text-align: center;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-direction: column;
+      min-height: 100vh;
+      box-sizing: border-box;
+      position: relative;
     }
 
-    #text {
-      white-space: pre-wrap;
-      font-size: 16px;
-      text-align: left;
-      position: absolute;
-      top: 100vh;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90%;
-      z-index: 2;
-      pointer-events: none;
+    h6 {
+      color: #c0c0c0;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-size: 1.5em;
     }
 
-    .button-container {
+    #lyrics {
+      flex-grow: 1;
+      overflow-y: auto;
+      text-align: center;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      margin-right: 20px;
+    }
+
+    .line {
+      margin: 15px 0;
+      font-size: 1.4em;
+      line-height: 1.6;
+    }
+
+    .current-line {
+      color: #FFA500;
+      font-weight: bold;
+      font-size: 1.6em;
+    }
+
+    #audio-container {
       position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
       display: flex;
-      justify-content: center;
-      gap: 10px;
-      padding: 6px;
-      z-index: 3;
+      flex-direction: column;
+      gap: 15px;
+      z-index: 20;
     }
 
-    .button-container button {
-      padding: 4px 10px;
-      font-size: 13px;
-      border: none;
-      border-radius: 4px;
-      background-color: #222;
-      color: white;
+    button {
+      background: none;
+      color: #c0c0c0;
+      border: 2px solid #c0c0c0;
+      padding: 12px 20px;
+      font-size: 1.1em;
+      border-radius: 25px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100px;
+      text-align: center;
+      box-sizing: border-box;
     }
+
+    button:hover {
+      background-color: #333;
+    }
+
+    button.play-button {
+      color: #FFA500;
+      border-color: #FFA500;
+    }
+
+    audio {
+      width: 80%;
+      max-width: 400px;
+      display: none;
+    }
+
+    #logo-footer {
+      display: none;
+    }
+    #volume-control {
+  -webkit-appearance: none;
+  width: 100px;
+  height: 6px;
+  background: #c0c0c0;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
   </style>
 </head>
 <body>
+  <h6>Canta ai Darcio<br>Legião Urbana</h6>
+  <div id="lyrics"></div>
 
-<div id="canvas">
-  <div id="text"></div>
-</div>
+  <div id="audio-container">
+    <button class="play-button" onclick="audio.play()">Play</button>
+    <button onclick="audio.pause()">Pausar</button>
+    <button onclick="audio.currentTime = 0; audio.pause()">Parar</button>
+ <input type="range" id="volume-control" min="0" max="1" step="0.01" value="1">
 
-<div class="button-container">
-  <button id="playBtn">PLAY</button>
-  <button id="pauseBtn" disabled>PAUSE</button>
-  <button id="themeBtn">CORES</button>
-</div>
+ </div>
 
-<audio id="audio" src="cocaa.mp3" preload="auto">
-  Seu navegador não suporta o elemento de áudio.
-</audio>
+  <audio id="audio" src="cocaa.mp3"></audio>
 
-<script>
-  const text = `
- Legião Urbana
-B
-   Quando nascemos fomos programados
-D             A
-   A receber o que vocês
-B
-   nos empurraram com os enlatados
-D            A
-   dos U.S.A., de 9 às 6
-B
-   Desde pequenos nós comemos lixo
-D           A
-   Comercial e industrial
-B
-   Mas agora chegou nossa vez
-D                        A
-Vamos cuspir de volta o lixo em cima de vocês
+  <script>
+    const audio = document.getElementById('audio');
+    const lyricsContainer = document.getElementById('lyrics');
+document.getElementById('volume-control').addEventListener('input', function() {
+  audio.volume = this.value;
+});
 
-(refrão)
-B            A           G
-   Somos os filhos da revolução
-B             A           G
-   Somos burgueses sem religião
-B        A         G
-   Somos o futuro da nação
-A       D    B
-Geração Coca-Cola
+    const lrc = `
+[ti:Geração Coca cola]
+[ar:Legião Urbana]
+[al:]
+[la:]
+[re:LRCStudio]
+[by:]
+[ve:1.0.18]
 
-(2ª estrofe)
-B
-   Depois de vinte anos na escola
-D                A
-   Não é difícil aprender
-B
-   Todas as manhas do seu jogo sujo
-D                 A
-   Não é assim que tem que ser?
-B
-   Vamos fazer nosso dever de casa
-D             A
-   E aí então, vocês vão ver
-B
-   Suas crianças derrubando reis
-D                      A
-Fazer comédia no cinema com as suas leis
-
-(refrão)
-B            A           G
-   Somos os filhos da revolução
-B             A           G
-   Somos burgueses sem religião
-B        A         G
-   Somos o futuro da nação
-A       D    B     A       D    B
-Geração Coca-Cola, geração coca-cola
-A       D    B     A       D    B
-Geração Coca-Cola, geração coca-cola
-
-(solo 2 - 3x)
-G   A   B
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-B
-   Depois de vinte anos na escola
-D                A
-   Não é difícil aprender
-B
-   Todas as manhas do seu jogo sujo
-D                 A
-   Não é assim que tem que ser?
-B
-   Vamos fazer nosso dever de casa
-D             A
-   E aí então, vocês vão ver
-B
-   Suas crianças derrubando reis
-D                      A
-Fazer comédia no cinema com as suas leis
-
-(refrão)
-B            A           G
-   Somos os filhos da revolução
-B             A           G
-   Somos burgueses sem religião
-B        A         G
-   Somos o futuro da nação
-A       D    B     A       D    B
-Geração Coca-Cola, geração coca-cola
-A       D    B     A       D    B
-Geração Coca-Cola, geração coca-cola
-
-(solo 2 - 3x)
-G   A   B
-
-Composição: Renato Russo
+[00:00.000]Geração Coca cola
+[00:00.000]
+[00:00.000]
+[00:11.262]   Quando nascemos fomos programados
+[00:13.886]
+[00:16.161]   A receber o que vocês
+[00:17.211]
+[00:18.437]   nos empurraram com os enlatados
+[00:19.313]
+[00:20.012]   dos U.S.A., de 9 às 6
+[00:20.890]
+[00:22.119]   Desde pequenos nós comemos lixo
+[00:23.337]
+[00:24.211]   Comercial e industrial
+[00:25.787]
+[00:27.016]   Mas agora chegou nossa vez
+[00:27.713]
+[00:29.637]Vamos cuspir de volta o lixo em cima de vocês
+[00:30.170]
+[00:30.518]
+[00:30.686]
+[00:31.037]   Somos os filhos da revolução
+[00:32.262]
+[00:34.012]   Somos burgueses sem religião
+[00:34.539]
+[00:35.237]   Somos o futuro da nação
+[00:36.112]Geração Coca-Cola
+[00:36.643]
+[00:36.992]
+[00:37.162]
+[00:37.862]   Depois de vinte anos na escola
+[00:42.587]
+[00:43.637]   Não é difícil aprender
+[00:44.163]
+[00:46.612]   Todas as manhas do seu jogo sujo
+[00:47.665]
+[00:48.536]   Não é assim que tem que ser?
+[00:49.242]
+[00:50.289]   Vamos fazer nosso dever de casa
+[00:51.686]
+[00:53.266]   E aí então, vocês vão ver
+[00:54.662]
+[00:55.716]   Suas crianças derrubando reis
+[00:56.937]
+[00:58.687]Fazer comédia no cinema com as suas leis
+[00:59.219]
+[00:59.736]
+[01:00.265]
+[01:01.662]   Somos os filhos da revolução
+[01:02.713]
+[01:03.767]   Somos burgueses sem religião
+[01:04.811]
+[01:06.041]   Somos o futuro da nação
+[01:07.436]Geração Coca-Cola, geração coca-cola
+[01:09.014]
+[01:16.887]Geração Coca-Cola, geração coca-cola
+[01:19.512]
+[01:21.631]
+[01:32.306]
+[01:40.706]   Depois de vinte anos na escola
+[01:41.931]
+[01:43.159]   Não é difícil aprender
+[01:43.857]
+[01:44.906]   Todas as manhas do seu jogo sujo
+[01:44.906]
+[01:47.356]   Não é assim que tem que ser?
+[01:48.239]
+[01:50.506]   Vamos fazer nosso dever de casa
+[01:51.559]
+[01:52.256]   E aí então, vocês vão ver
+[01:53.136]
+[01:54.531]   Suas crianças derrubando reis
+[01:55.410]
+[01:56.456]Fazer comédia no cinema com as suas leis
+[01:57.856]
+[01:59.956]   Somos os filhos da revolução
+[02:00.840]
+[02:01.889]   Somos burgueses sem religião
+[02:02.932]
+[02:04.159]   Somos o futuro da nação
+[02:05.206]
+[02:06.256]Geração Coca-Cola, geração coca-cola
+[02:07.131]
+[02:09.406]Geração Coca-Cola, geração coca-cola
+[02:10.981]
+[02:14.306]
+[02:15.006]Composição: Renato Russo
 Elaborado por Dorval Luz
-`;
 
-  let yPos = window.innerHeight;
-  let scrolling = false;
-  let scrollSpeed = 0.4;
+    `;
 
-  const textElement = document.getElementById('text');
-  const playBtn = document.getElementById('playBtn');
-  const pauseBtn = document.getElementById('pauseBtn');
-  const themeBtn = document.getElementById('themeBtn');
-  const audio = document.getElementById('audio');
+    const lines = [];
 
-  textElement.innerText = text;
-
-  function updateTextPosition() {
-    if (scrolling) {
-      yPos -= scrollSpeed;
-      textElement.style.top = `${yPos}px`;
-
-      if (yPos < -textElement.clientHeight) {
-        yPos = window.innerHeight;
-        scrolling = false;
-        playBtn.innerText = 'PLAY';
-        pauseBtn.disabled = true;
-        audio.pause();
-      } else {
-        requestAnimationFrame(updateTextPosition);
+    lrc.trim().split('\n').forEach(line => {
+      const match = line.match(/\[(\d+):(\d+\.\d+)\](.+)/);
+      if (match) {
+        const time = parseInt(match[1]) * 60 + parseFloat(match[2]);
+        const text = match[3].trim();
+        lines.push({ time, text });
       }
-    }
-  }
+    });
 
-  function toggleScrolling() {
-    if (scrolling) {
-      scrolling = false;
-      playBtn.innerText = 'PLAY';
-      pauseBtn.disabled = true;
-      audio.pause();
-    } else {
-      audio.currentTime = 0;
-      yPos = window.innerHeight;
-      scrolling = true;
-      playBtn.innerText = 'STOP';
-      pauseBtn.disabled = false;
-      audio.play();
-      updateTextPosition();
-    }
-  }
+    lines.forEach(line => {
+      const div = document.createElement('div');
+      div.className = 'line';
+      div.textContent = line.text;
+      lyricsContainer.appendChild(div);
+      line.element = div;
+    });
 
-  function pauseScrolling() {
-    if (scrolling) {
-      scrolling = false;
-      pauseBtn.innerText = 'RESUME';
-      audio.pause();
-    } else {
-      scrolling = true;
-      pauseBtn.innerText = 'PAUSE';
-      audio.play();
-      updateTextPosition();
-    }
-  }
+    audio.addEventListener('timeupdate', () => {
+      const currentTime = audio.currentTime;
+      let currentIndex = 0;
 
-  function changeTheme() {
-    textElement.style.color = textElement.style.color === 'lime' ? 'white' : 'lime';
-  }
+      for (let i = 0; i < lines.length; i++) {
+        if (lines[i].time <= currentTime) {
+          currentIndex = i;
+        }
+      }
 
-  playBtn.addEventListener('click', toggleScrolling);
-  pauseBtn.addEventListener('click', pauseScrolling);
-  themeBtn.addEventListener('click', changeTheme);
-</script>
-
+      lines.forEach((line, i) => {
+        line.element.classList.remove('current-line');
+        if (i === currentIndex) {
+          line.element.classList.add('current-line');
+          line.element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
+    });
+  </script>
 </body>
-  </html>
+</html>
