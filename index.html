@@ -2,10 +2,11 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Dorvalluz</title>
+  <title>Legião Urbana</title>
   <style>
     body {
-      background-color: #000;
+      background: url('legiao.jpg') no-repeat center center fixed;
+      background-size: cover;
       color: #c0c0c0;
       font-family: sans-serif;
       margin: 0;
@@ -23,6 +24,9 @@
       margin-top: 20px;
       margin-bottom: 10px;
       font-size: 1.5em;
+      background: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente para melhor leitura */
+      padding: 10px;
+      border-radius: 10px;
     }
 
     #lyrics {
@@ -34,6 +38,8 @@
       flex-direction: column;
       justify-content: flex-start;
       margin-right: 20px;
+      background: rgba(0, 0, 0, 0.4); /* Fundo para dar contraste nas letras */
+      border-radius: 15px;
     }
 
     .line {
@@ -91,16 +97,16 @@
     #logo-footer {
       display: none;
     }
-    #volume-control {
-  -webkit-appearance: none;
-  width: 100px;
-  height: 6px;
-  background: #c0c0c0;
-  border-radius: 5px;
-  outline: none;
-  cursor: pointer;
-}
 
+    #volume-control {
+      -webkit-appearance: none;
+      width: 100px;
+      height: 6px;
+      background: #c0c0c0;
+      border-radius: 5px;
+      outline: none;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -111,118 +117,69 @@
     <button class="play-button" onclick="audio.play()">Play</button>
     <button onclick="audio.pause()">Pausar</button>
     <button onclick="audio.currentTime = 0; audio.pause()">Parar</button>
- <input type="range" id="volume-control" min="0" max="1" step="0.01" value="1">
-
- </div>
+    <input type="range" id="volume-control" min="0" max="1" step="0.01" value="1">
+  </div>
 
   <audio id="audio" src="cocaa.mp3"></audio>
 
   <script>
     const audio = document.getElementById('audio');
     const lyricsContainer = document.getElementById('lyrics');
-document.getElementById('volume-control').addEventListener('input', function() {
-  audio.volume = this.value;
-});
+    document.getElementById('volume-control').addEventListener('input', function() {
+      audio.volume = this.value;
+    });
 
-    const lrc = `
-[ti:Geração Coca cola]
-[ar:Legião Urbana]
-[al:]
-[la:]
-[re:LRCStudio]
-[by:]
-[ve:1.0.18]
+    const lrc = `[id: pshjonuv]
+[ar: Legião Urbana]
+[al: Legião Urbana]
+[ti: Geração Coca-Cola]
+[length: 02:23]
+[00:10.32]Quando nascemos fomos programados
+[00:12.90]A receber o que vocês
+[00:15.38]Nos empurraram com os enlatados
+[00:17.76]Dos USA, nove às seis
+[00:19.04]Desde pequenos, nós comemos lixo
+[00:22.72]Comercial e industrial
+[00:24.65]Mas agora chegou a nossa vez
+[00:26.30]Vamos cuspir de volta o lixo em cima de vocês
+[00:29.69]Somos os filhos da revolução
+[00:31.86]Somos burgueses sem religião
+[00:34.09]Somos o futuro da nação
+[00:36.05]Geração Coca-Cola
+[00:39.39]Depois de vinte anos na escola
+[00:41.73]Não é difícil aprender
+[00:44.76]Todas as manhas do seu jogo sujo
+[00:46.37]Não é assim que tem que ser
+[00:49.31]Vamos fazer nosso dever de casa
+[00:51.36]E aí então, vocês vão ver
+[00:53.96]Suas crianças derrubando reis
+[00:55.83]Fazer comédia no cinema com as suas leis
+[00:58.38]Somos os filhos da revolução
+[01:01.75]Somos burgueses sem religião
+[01:03.89]Somos o futuro da nação
+[01:06.43]Geração Coca-Cola
+[01:08.75]Geração Coca-Cola
+[01:11.68]Geração Coca-Cola
+[01:13.66]Geração Coca-Cola
+[01:38.93]Depois de vinte anos na escola
+[01:41.03]Não é difícil aprender
+[01:42.99]Todas as manhas do seu jogo sujo
+[01:45.06]Não é assim que deve ser
+[01:47.56]Vamos fazer o nosso dever de casa
+[01:49.97]E aí então vocês vão ver
+[01:52.22]Suas crianças derrubando reis
+[01:53.81]Fazer comédia no cinema com as suas leis
+[01:57.62]Somos os filhos da revolução
+[02:00.54]Somos burgueses sem religião
+[02:02.56]Somos o futuro da nação
+[02:05.03]Geração Coca-Cola
+[02:06.92]Geração Coca-Cola
+[02:09.73]Geração Coca-Cola
+[02:12.32]Geração Coca-Cola
+[02:15.87]
+[02:15.006]By DorvalLuz
 
-[00:00.000]Geração Coca cola
-[00:00.000]
-[00:00.000]
-[00:11.262]   Quando nascemos fomos programados
-[00:13.886]
-[00:16.161]   A receber o que vocês
-[00:17.211]
-[00:18.437]   nos empurraram com os enlatados
-[00:19.313]
-[00:20.012]   dos U.S.A., de 9 às 6
-[00:20.890]
-[00:22.119]   Desde pequenos nós comemos lixo
-[00:23.337]
-[00:24.211]   Comercial e industrial
-[00:25.787]
-[00:27.016]   Mas agora chegou nossa vez
-[00:27.713]
-[00:29.637]Vamos cuspir de volta o lixo em cima de vocês
-[00:30.170]
-[00:30.518]
-[00:30.686]
-[00:31.037]   Somos os filhos da revolução
-[00:32.262]
-[00:34.012]   Somos burgueses sem religião
-[00:34.539]
-[00:35.237]   Somos o futuro da nação
-[00:36.112]Geração Coca-Cola
-[00:36.643]
-[00:36.992]
-[00:37.162]
-[00:37.862]   Depois de vinte anos na escola
-[00:42.587]
-[00:43.637]   Não é difícil aprender
-[00:44.163]
-[00:46.612]   Todas as manhas do seu jogo sujo
-[00:47.665]
-[00:48.536]   Não é assim que tem que ser?
-[00:49.242]
-[00:50.289]   Vamos fazer nosso dever de casa
-[00:51.686]
-[00:53.266]   E aí então, vocês vão ver
-[00:54.662]
-[00:55.716]   Suas crianças derrubando reis
-[00:56.937]
-[00:58.687]Fazer comédia no cinema com as suas leis
-[00:59.219]
-[00:59.736]
-[01:00.265]
-[01:01.662]   Somos os filhos da revolução
-[01:02.713]
-[01:03.767]   Somos burgueses sem religião
-[01:04.811]
-[01:06.041]   Somos o futuro da nação
-[01:07.436]Geração Coca-Cola, geração coca-cola
-[01:09.014]
-[01:16.887]Geração Coca-Cola, geração coca-cola
-[01:19.512]
-[01:21.631]
-[01:32.306]
-[01:40.706]   Depois de vinte anos na escola
-[01:41.931]
-[01:43.159]   Não é difícil aprender
-[01:43.857]
-[01:44.906]   Todas as manhas do seu jogo sujo
-[01:44.906]
-[01:47.356]   Não é assim que tem que ser?
-[01:48.239]
-[01:50.506]   Vamos fazer nosso dever de casa
-[01:51.559]
-[01:52.256]   E aí então, vocês vão ver
-[01:53.136]
-[01:54.531]   Suas crianças derrubando reis
-[01:55.410]
-[01:56.456]Fazer comédia no cinema com as suas leis
-[01:57.856]
-[01:59.956]   Somos os filhos da revolução
-[02:00.840]
-[02:01.889]   Somos burgueses sem religião
-[02:02.932]
-[02:04.159]   Somos o futuro da nação
-[02:05.206]
-[02:06.256]Geração Coca-Cola, geração coca-cola
-[02:07.131]
-[02:09.406]Geração Coca-Cola, geração coca-cola
-[02:10.981]
-[02:14.306]
-[02:15.006]Composição: Renato Russo
-Elaborado por Dorval Luz
-
-    `;
+`; // Sua letra LRC completa aqui
 
     const lines = [];
 
