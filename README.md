@@ -1,5 +1,3 @@
-Projeto Karaokê Legião UrbanaEste é um projeto de karaokê para a música # Projeto Karaokê Legião Urbana
-
 Este é um projeto de karaokê para a música **"Geração Coca-Cola"** da **Legião Urbana**. Ele exibe a letra da música sincronizada com a reprodução do áudio.
 
 ## Funcionalidades
